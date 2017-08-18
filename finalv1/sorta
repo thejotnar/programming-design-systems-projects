@@ -1,0 +1,34 @@
+var r = new Rune({
+  container: "#canvas",
+  width: 1200,
+  height: 1600,
+  debug: true
+});
+
+// draw background
+r.rect(0, 0, r.width, r.height).fill(255);
+
+var noise = new Rune.Noise().noiseDetail(0.1);
+var numPoints = 40;
+var pointDegree = 360 / numPoints;
+var radius = 700;
+var noiseStep = 500;
+
+var noiseCircle = r.polygon(r.width / 2, r.height / 2)
+  .stroke(0)
+  .fill(false)
+  .strokeWidth(2);
+
+for(var j = 0; j < 75; j++) {
+
+for(var i = 0; i < numPoints; i++) {
+
+  var noiseRadius = (noise.get(noiseStep) * 30) + radius;
+  var x = Math.cos(Rune.radians(pointDegree * i)) * noiseRadius ;
+  var y = Math.sin(Rune.radians(pointDegree * i)) * noiseRadius * j/4 + 2000
+
+  noiseCircle.lineTo(x, y);
+  noiseStep += 5;
+}
+}
+r.draw();

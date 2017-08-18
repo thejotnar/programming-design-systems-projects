@@ -1,0 +1,57 @@
+var r = new Rune({
+  container: "#canvas",
+  width: 600,
+  height: 800,
+  debug: false
+});
+
+var title = [
+  r.text("P"),
+  r.text("l"),
+  r.text("a"),
+  r.text("y"),
+  r.text("e"),
+  r.text("r"),
+  r.text(" "),
+  r.text("P"),
+  r.text("i"),
+  r.text("a"),
+  r.text("n"),
+  r.text("o")
+]
+
+var grid = r.grid({
+  x: 50,
+  y: 500,
+  width: r.width - 100,
+  height: 250,
+  gutter: 0,
+  columns: 45,
+  rows: 30
+});
+
+var size = 5;
+var color = 0;
+
+for var (i = 0; i < title.length; i++) {
+  var x = Rune.random(size, grid.state.moduleWidth - size);
+  var y = Rune.random(size, grid.state.moduleHeight - size);
+ // r.text(i, x, y);
+  var randomCol = Math.ceil(Rune.random(grid.state.columns));
+  var randomRow = Math.ceil(Rune.random(grid.state.rows));
+  grid.add(title[i], randomCol, randomRow)
+}
+
+
+
+// for(var i = 0; i < 100; i++) {
+//   //var color = new Rune.Color(Rune.random(0, 255), Rune.random(0, 255), Rune.random(0, 255));
+//   var x = Rune.random(size, grid.state.moduleWidth - size);
+//   var y = Rune.random(size, grid.state.moduleHeight - size);
+
+//   // we use .ceil because numbers start at 1
+//   var randomCol = Math.ceil(Rune.random(grid.state.columns));
+//   var randomRow = Math.ceil(Rune.random(grid.state.rows));
+// }
+
+r.draw();
